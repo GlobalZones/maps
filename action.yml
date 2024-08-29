@@ -30,7 +30,7 @@ runs:
   steps:
     - name: Initial action
       if: runner.os == 'Linux'
-      uses: ./.github/actions/1-ubuntu/1-maps/1-init@main
+      uses: .github/actions/1-ubuntu/1-maps/1-init@main
       with:
         actor: ${{ github.actor }}
         token: ${{ inputs.token }}
