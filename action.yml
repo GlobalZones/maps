@@ -37,7 +37,7 @@ runs:
 
     - name: Target Configuration
       if: runner.os == 'Linux'
-      uses: eq19/eq19/.github/actions/1-ubuntu/1-maps/2-build@main
+      uses: ./.github/actions/1-ubuntu/1-maps/2-build@main
       with:
         hub_username: ${{ inputs.docker_hub_username }}
         hub_password: ${{ inputs.docker_hub_password }}
@@ -46,7 +46,7 @@ runs:
 
     - name: Profiling Feedback
       if: runner.os == 'Windows'
-      uses: eq19/eq19/.github/actions/2-windows/1-maps/1-init@main
+      uses: ./.github/actions/2-windows/1-maps/1-init@main
       with:
         token: ${{ inputs.token }}
         action_path: ${GITHUB_ACTION_PATH//\\//}
