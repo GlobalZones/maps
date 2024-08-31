@@ -31,14 +31,13 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: echo ${{ inputs.path }}
-      shell: bash
     - name: Initial action
       if: runner.os == 'Linux'
       uses: eq19/eq19/.github/actions/1-ubuntu/1-maps/1-init@main
       with:
-        actor: ${{ github.actor }}
+        path: ${{ inputs.path }}
         token: ${{ inputs.token }}
+        actor: ${{ github.actor }}
 
     - name: Target Configuration
       if: runner.os == 'Linux'
