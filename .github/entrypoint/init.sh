@@ -109,7 +109,7 @@ jekyll_build() {
 # Get structure on gist files
 PATTERN='sort_by(.created_at)|.[] | select(.public == true).files.[] | select(.filename != "README.md").raw_url'
 HEADER="Accept: application/vnd.github+json" && echo ${TOKEN} | gh auth login --with-token
-gh api -H "${HEADER}" /users/eq19/gists --jq "${PATTERN}" > ${TMP}/gist_files
+gh api -H "${HEADER}" "/users/eq19/gists" --jq "${PATTERN}" > ${TMP}/gist_files
 
 mv ${GITHUB_WORKSPACE}/.github/templates/_config.yml ${TMP}/_config.yml
 sudo gem install nokogiri --platform=ruby
