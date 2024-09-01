@@ -24,7 +24,7 @@ inputs:
   token:
     description: The Github personal token
     required: true
-  path:
+  temp:
     description: The path according to os
     required: true
 
@@ -35,7 +35,7 @@ runs:
       if: runner.os == 'Linux'
       uses: eq19/eq19/.github/actions/1-ubuntu/1-maps/1-init@main
       with:
-        path: ${{ inputs.path }}
+        temp: ${{ inputs.temp }}
         token: ${{ inputs.token }}
         actor: ${{ github.actor }}
 
