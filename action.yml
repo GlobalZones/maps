@@ -31,12 +31,18 @@ inputs:
     description: The path according to os
     required: true
 
+outputs:
+  output_1:
+    description: "A file path to a results file."
+    value: ${{ steps.init.outputs.site_id}}
+
 runs:
   using: composite
   steps:
     - name: Initial action
       if: runner.os == 'Linux'
       uses: eq19/eq19/.github/actions/1-ubuntu/1-maps/1-init@main
+      id: init
       with:
         tmp: ${{ inputs.tmp }}
         base: ${{ inputs.base }}
