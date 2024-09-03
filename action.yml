@@ -34,7 +34,7 @@ inputs:
 outputs:
   output_1:
     description: "A file path to a results file."
-    value: ${{ steps.init.outputs.site_id}}
+    value: ${{ steps.build.outputs.site_id}}
 
 runs:
   using: composite
@@ -52,6 +52,7 @@ runs:
     - name: Target Configuration
       if: runner.os == 'Linux'
       uses: eq19/eq19/.github/actions/1-ubuntu/1-maps/2-build@main
+      id: build
       with:
         hub_username: ${{ inputs.docker_hub_username }}
         hub_password: ${{ inputs.docker_hub_password }}
