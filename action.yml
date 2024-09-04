@@ -32,8 +32,8 @@ inputs:
     required: true
 
 outputs:
-  output_1:
-    description: "A file path to a results file."
+  id:
+    description: The site id
     value: ${{ steps.build.outputs.site_id}}
 
 runs:
