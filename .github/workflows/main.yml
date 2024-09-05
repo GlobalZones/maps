@@ -14,7 +14,7 @@ name: Build and Deploy Cell Types – Modulo 6
 # 2) Use https://github.com/nektos/act to run your CI steps locally. Note this will only work with
 #    steps run on Linux platforms, as `act` is implemented with Docker containers.
 # 3) Use https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#using-job-outputs-in-a-matrix-job
-#    to shar environment variables across multiple runners
+#    to share environment variables across multiple runners
 #
 # Our strategy is to rely on the built-in (unspecified) shell, and explicitly set the
 # shell settings we want (with `set -eo pipefail`) at the beginning of anybash script.
