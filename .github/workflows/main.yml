@@ -14,7 +14,7 @@ name: COmpendium of RElations – Modulo 6
 # 2) Use https://github.com/nektos/act to run your CI steps locally. Note this will only work with
 #    steps run on Linux platforms, as `act` is implemented with Docker containers.
 # 3) Use https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#using-job-outputs-in-a-matrix-job
-#    to share environment variables across multiple runners
+#    to share environment variables across multiple runners and join them, see https://stackoverflow.com/a/59201610/4058484
 #
 # Our strategy is to rely on the built-in (unspecified) shell, and explicitly set the
 # shell settings we want (with `set -eo pipefail`) at the beginning of anybash script.
@@ -84,10 +84,11 @@ jobs:
           docker_hub_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           
     outputs:
-      # ♻️ Simulate Gell-Mann Matrices    
+      # ♻️ Simulate Gell-Mann Matrices
       id: ${{ steps.build-parser.outputs.id }}
       spin: ${{ steps.feed-mapping.outputs.spin }}
-      decays: ${{ steps.set-lexering.outputs.decays }}
+      #target: ${{ steps.set-lexering.outputs.decays }}
+      target: ${{join(steps.set-lexering.outputs.*, '\n')}}
 
   setup-parser:
     needs: lexering
