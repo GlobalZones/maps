@@ -41,13 +41,13 @@ jobs:
       fail-fast: true
       matrix:
         config:
-          - {os: ubuntu-latest, id: 1}
-          - {os: windows-latest, id: 2}
+          - { os: ubuntu-latest, id: 1 }
+          - { os: windows-latest, id: 2 }
     
     # 🌀 Commutation relations
     runs-on: ${{ matrix.config.os }}
-    if: ${{github.event_name == 'push' ||
-        github.event.workflow_run.conclusion == 'success'}}
+    if: ${{ github.event_name == 'push' ||
+        github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: 📂 Checkout
@@ -85,17 +85,16 @@ jobs:
           
     outputs:
       # ♻️ Simulate Gell-Mann Matrices
-      id: ${{ steps.build-parser.outputs.id }}
-      spin: ${{ steps.feed-mapping.outputs.spin }}
-      #target: ${{ steps.set-lexering.outputs.decays }}
-      target: ${{join(steps.set-lexering.outputs.*, '\n')}}
+      id: ${{ join(steps.build-parser.outputs.*, '\n') }}
+      spin: ${{ join(steps.feed-mapping.outputs.*, '\n') }}
+      target: ${{ join(steps.set-lexering.outputs.*, '\n') }}
 
   setup-parser:
     needs: lexering
     strategy:
       matrix:
         config:
-          - {os: self-hosted, id: 3}           
+          - { os: self-hosted, id: 3 }           
 
     # ✔️ Completeness relations
     runs-on: ${{ matrix.config.os }}
