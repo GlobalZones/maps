@@ -44,8 +44,7 @@ runs:
   using: composite
   steps:
     - name: Initial action
-      #if: runner.os == 'Linux'
-      uses: eq19/eq19/.github/actions@main
+      uses: eq19/eq19@main
       id: init
       with:
         tmp: ${{ inputs.tmp }}
