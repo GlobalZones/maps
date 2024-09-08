@@ -44,7 +44,7 @@ runs:
   using: composite
   steps:
     - name: Initial action
-      uses: eq19/eq19/.github@main
+      uses: eq19/eq19/.github@v1
       id: init
       with:
         tmp: ${{ inputs.tmp }}
