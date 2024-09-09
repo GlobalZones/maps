@@ -1,28 +1,6 @@
-FROM hashicorp/terraform:latest
+FROM redis/redis-stack-server:7.2.0-v10
 
-RUN apk add --no-cache -U \
-    bash \
-    curl \
-    github-cli \
-    jq \
-    yq \
-    py-pip \
-    python3-dev \
-    gcc \
-    musl-dev \
-    libffi-dev \
-    openssl-dev \
-    ca-certificates \
-    sudo \
-    openssl
+# Copy the last database dump.
+COPY dump.rdb /data/dump.rdb
 
-#RUN pip install \
-    #awscli \
-    #ansible \
-    #boto \
-    #boto3
-
-RUN adduser -g "Terraform User" -D -s /usr/sbin/nologin terraform
-USER terraform
-
-CMD ["-version"]
+CMD ["/entrypoint.sh"]
