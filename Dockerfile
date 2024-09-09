@@ -1,4 +1,4 @@
-FROM redis/redis-stack-server:7.2.0-v10
+FROM redis/redis-stack-server:latest
 
 # Copy the last database dump.
 COPY dump.rdb /data/dump.rdb
