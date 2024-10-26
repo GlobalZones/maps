@@ -72,7 +72,7 @@ runs:
         hub_username: ${{ inputs.docker_hub_username }}
         hub_token: ${{ inputs.docker_hub_token }} 
 
-    - uses: ikalnytskyi/action-setup-postgres@v6 
+    - uses: ikalnytskyi/action-setup-postgres@v7 
       with:
         username: yoda
         password: GrandMaster
