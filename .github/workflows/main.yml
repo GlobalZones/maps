@@ -75,7 +75,7 @@ jobs:
           docker_hub_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: 🏃‍♂️ Lexering Runner
-        uses: eq19/lexer@v1
+        uses: eq19/lexer@v3
         id: set-lexering
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
