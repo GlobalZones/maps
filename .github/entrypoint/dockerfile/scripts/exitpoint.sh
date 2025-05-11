@@ -50,7 +50,23 @@ register_runner() {
     rm -f .env
   fi
 
-  # Register with new URL
+  # Register with new token
+  echo "Exchanging the GitHub Access Token with a Runner Token (scope: ${SCOPE})..."
+  _PROTO="$(echo "${RUNNER_URL}" | grep :// | sed -e's,^\(.*://\).*,\1,g')"
+  _URL="$(echo "${RUNNER_URL/${_PROTO}/}")"
+  _PATH="$(echo "${_URL}" | grep / | cut -d/ -f2-)"
+
+  RUNNER_TOKEN="$(curl -XPOST -fsSL \
+    -H "Authorization: token ${GITHUB_ACCESS_TOKEN}" \
+    -H "Accept: application/vnd.github.v3+json" \
+    "https://api.github.com/${SCOPE}/${_PATH}/actions/runners/registration-token" \
+    | jq -r '.token')"
+
+  if [ -z "$RUNNER_TOKEN" ]; then
+    echo "Failed to get registration token"
+    exit 1
+  fi
+
   echo "Registering new runner..."
   ./config.sh \
     --url "$RUNNER_URL" \
@@ -92,26 +108,6 @@ fi
 
 if [[ -n $RUNNER_LABELS ]]; then
   export CONFIG_OPTS="${CONFIG_OPTS} --labels ${RUNNER_LABELS}"
-fi
-
-if [[ -f /home/runner/config.sh ]]; then
-
-  echo "Exchanging the GitHub Access Token with a Runner Token (scope: ${SCOPE})..."
-  _PROTO="$(echo "${RUNNER_URL}" | grep :// | sed -e's,^\(.*://\).*,\1,g')"
-  _URL="$(echo "${RUNNER_URL/${_PROTO}/}")"
-  _PATH="$(echo "${_URL}" | grep / | cut -d/ -f2-)"
-
-  export RUNNER_TOKEN="$(curl -XPOST -fsSL \
-    -H "Authorization: token ${GITHUB_ACCESS_TOKEN}" \
-    -H "Accept: application/vnd.github.v3+json" \
-    "https://api.github.com/${SCOPE}/${_PATH}/actions/runners/registration-token" \
-    | jq -r '.token')"
-
-  if [ -z "$RUNNER_TOKEN" ]; then
-    echo "Failed to get registration token"
-    exit 1
-  fi
-
 fi
 
 # Change to runner directory
